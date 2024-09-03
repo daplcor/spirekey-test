@@ -1,11 +1,25 @@
-# React + Vite
 
-Built using pnpm
-pnpm install
-pnpm run dev
+# Simple SpireKey Signing Example
 
+This project demonstrates how to sign transactions using SpireKey with dynamic signer management. It is built using `pnpm`.
 
-The key differences noted in here vs normal signing is in the addSigner section.  
+## Installation and Development
+
+To set up and run the project:
+
+1. **Install dependencies**:
+   ```bash
+   pnpm install
+   ```
+
+2. **Run the development server**:
+   ```bash
+   pnpm run dev
+   ```
+
+## Key Differences in Signing
+
+The key difference in this example, compared to standard signing methods, is in the `addSigner` section of the code.
 
 ### Adding Signers to a Transaction
 
@@ -25,3 +39,16 @@ account.devices.flatMap((device) =>
     )
   )
 );
+```
+
+### Explanation:
+
+- **Dynamic Signer Addition**:
+  - The code iterates over the devices associated with the account.
+  - For each device, it maps over the associated keys.
+  - The `addSigner` function adds the signer's public key and determines the signing scheme (either `WebAuthn` or `ED25519`).
+
+- **Gas Capability**:
+  - The signer is granted the `coin.GAS` capability to pay for the transaction's gas costs.
+
+This pattern ensures that all relevant keys from all devices are included as signers in the transaction, with the appropriate signing scheme and permissions.
