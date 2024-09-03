@@ -1,8 +1,27 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Built using pnpm
+pnpm install
+pnpm run dev
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The key differences noted in here vs normal signing is in the addSigner section.  
+
+### Adding Signers to a Transaction
+
+The following code snippet demonstrates how to dynamically add signers to a transaction based on the devices associated with an account. This is particularly useful when working with multiple authentication schemes, such as WebAuthn and ED25519.
+
+```javascript
+account.devices.flatMap((device) =>
+  device.guard.keys.map((key) =>
+    txb.addSigner(
+      {
+        pubKey: key,
+        scheme: /^WEBAUTHN-/.test(key) ? 'WebAuthn' : 'ED25519',
+      },
+      (withCap) => [
+        withCap('coin.GAS'),
+      ]
+    )
+  )
+);
