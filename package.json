@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@kadena/client": "^1.13.0",
-    "@kadena/spirekey-sdk": "^0.0.1-dev-12",
+    "@kadena/client": "^1.17.1",
+    "@kadena/spirekey-sdk": "1.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
